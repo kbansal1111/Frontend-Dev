@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; 
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: end;
+            gap: 2em;
+            border: 2px solid black;
+        }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+
+        main{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+            padding: 2em;
+        }
+        footer{
+            margin-top: auto;
+            border: 2px solid black;
+            text-align: center;
+
+        }
+        @media (max-width: 700px) {
+            header, main {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kartik bansal</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <p>This is a brief introduction about myself and my work.</p>
+        </section>
+        <section>
+            <img src="../Assignment/images/bird.jpg" alt="">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Kartik Bansal. All rights reserved.</p>
+    </footer>
+    
+</body>
+</html>
