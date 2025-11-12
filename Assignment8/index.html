@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 8</title>
+    <style>
+        .bla{
+            color: blue;        
+        }
+        .bla:hover{
+                color: red;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        .btn{
+            cursor: pointer;
+            background-color: rgb(151, 38, 38);
+            color: white;
+            border: none;
+        }
+        .btn:focus{
+                background-color: yellow;
+            }
+            .link:active{
+                color: green;
+            }
+            :nth-child(odd){
+                color: rgb(239, 6, 184);
+            }
+            body{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 20px;
+            }
+    </style>
+</head>
+<body>
+    <div class="bla">
+        <h3>Welcome to Assignment 8</h3>
+    </div>
+    <button class="btn">Click me</button>
+    <a class="link" href="#">This is a link</a>
+</body>
+</html>
