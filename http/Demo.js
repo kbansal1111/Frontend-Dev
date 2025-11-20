@@ -5,7 +5,7 @@ function getData() {
     console.log("Email:", email, "Password:", password);
 
     let emailpattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    let passwordpattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    let passwordpattern = /^(?=.*[0-9])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{7,15}$/;
     
     if(email=="" || password==""){
         alert("Fields cannot be empty");
@@ -30,9 +30,10 @@ function getData() {
     // Validation successful - send to db.json using different methods
     // Uncomment the method you want to test:
     
-    loginWithXHR(email, password);        // Traditional XMLHttpRequest
-    // loginWithFetch(email, password);   // Modern Fetch API
+    //loginWithXHR(email, password);        // Traditional XMLHttpRequest
+    loginWithFetch(email, password);      // Modern Fetch API
     // loginWithJQuery(email, password);  // jQuery AJAX
+    // loginWithAxios(email, password);   // Axios Library (Most Popular)
 }
 
 // ============================================================
@@ -160,16 +161,51 @@ function loginWithJQuery(email, password){
 }
 
 // ============================================================
-// COMPARISON SUMMARY (Check console for details):
+// METHOD 4: Axios - Modern HTTP Client Library
 // ============================================================
-/*
-┌─────────────┬──────────────┬─────────────────┬─────────────────┐
-│   Method    │   Syntax     │  Browser Support│   Best For      │
-├─────────────┼──────────────┼─────────────────┼─────────────────┤
-│ XHR         │  Verbose     │  All browsers   │  Legacy support │
-│ Fetch       │  Clean       │  Modern only    │  New projects   │
-│ jQuery      │  Simple      │  All (with lib) │  jQuery apps    │
-└─────────────┴──────────────┴─────────────────┴─────────────────┘
+// Pros: Best features, automatic JSON, interceptors, timeout
+// Cons: External library needed (13KB gzipped)
+// Use case: Production apps, best developer experience
+function loginWithAxios(email, password){
+    let formData = {
+        username: email.split('@')[0],
+        email: email,
+        password: password
+    };
 
-// To test different methods, uncomment in getData() function above
-*/
+    console.log("=== METHOD 4: Axios (Production Grade) ===");
+    console.log("Form Data:", formData);
+
+    // Check if Axios is loaded
+    if (typeof axios === 'undefined') {
+        alert("Axios is not loaded! Add Axios CDN to HTML first.");
+        console.error("✗ Axios not found");
+        return;
+    }
+
+    // Axios automatically converts to JSON and handles errors better
+    axios.post('http://localhost:3000/login', formData)
+        .then(response => {
+            console.log("\n✓ Axios Response:");
+            console.log(response.data);        // Direct data access (no need for .json())
+            console.log("Status:", response.status);
+            console.log("Headers:", response.headers);
+            console.log("==================\n");
+            alert("✓ Axios: Login successful! Data saved to db.json");
+        })
+        .catch(error => {
+            console.error("✗ Axios Error:");
+            if (error.response) {
+                // Server responded with error status
+                console.error("Status:", error.response.status);
+                console.error("Data:", error.response.data);
+            } else if (error.request) {
+                // Request made but no response
+                console.error("No response received");
+            } else {
+                // Error in setting up request
+                console.error("Error:", error.message);
+            }
+            alert("Error: " + error.message);
+});
+}
